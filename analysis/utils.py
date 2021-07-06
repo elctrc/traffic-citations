@@ -1,18 +1,18 @@
-import logging
 import pandas as pd
 
-# Create logger object
-logger = logging.getLogger(__name__)
-# logging.basicConfig(level=logging.INFO, format="%(asctime)s : %(levelname)s : %(message)s")
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s")
-
 def get_clean(source_file):
-    # Grab data source from s3
-    logging.info('Reading from source...')
+    """Generate a clean data frame from source file"""
+    print('Reading from source...')
     df = pd.read_csv(source_file)
-    logging.info('Cleaning up source csv...')
+    print('Cleaning up source csv...')
     # Drop rows with too much NA data
     df.drop(['Meter Id', 'Marked Time', 'VIN'], axis=1, inplace=True)
     # Drop rows missing "Make"
-    logging.info('Import complete')
-    return(df[df['Make'].notna()])
+    print('Import complete')
+    return df[df['Make'].notna()]
+
+def get_top_25(df):
+    """Generate list of top 25 makes"""
+    print('Generating top 25 Makes...')
+    common_makes = df.groupby('Make')['Ticket number'].count().sort_values(ascending=False).head(25)
+    return [make for make in common_makes.index]
