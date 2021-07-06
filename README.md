@@ -2,9 +2,11 @@
 Contains corrupted data set of vehicle citations. The goal of this project is to predict the make of each missing vehicle
 
 ## Installation
-Quickest method would be to use virtualenv:
+Install method described uses virtualenv:
+* Clone this repo into your local environment
+* CD into the repo
 * Install virtualenv if not already installed: `pip install virtualenv`
-* Create new virtualenv: `virtualenv venv`
+* Create new virtualenv using Python 3: `virtualenv --python=python3.7 venv` (example)
 * Activate virtualenv: `source venv/bin/activate`
 * Install from requirements: `pip install -r requirements.txt`
 
