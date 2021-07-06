@@ -7,8 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
 print('Getting data set...')
-dataset = pd.read_csv('https://s3-us-west-2.amazonaws.com/pcadsassessment/parking_citations.corrupted.csv')
-# dataset = pd.read_csv('parking_citations.corrupted.csv')
+# dataset = pd.read_csv('https://s3-us-west-2.amazonaws.com/pcadsassessment/parking_citations.corrupted.csv')
+dataset = pd.read_csv('parking_citations.corrupted.csv')
 
 def prepare_data(df):
     # Drop rows missing our output variable
@@ -51,6 +51,8 @@ df = prepare_data(dataset)
 # features = ['RP State Plate', 'Body Style', 'Color', 'Agency', 'Fine amount']
 features = ['Issue time', 'Plate Expiry Date', 'Agency', 'Fine amount', 'Latitude', 'Longitude']
 top_25 = get_top_25(df)
+# Write top 25 to file for later
+pickle.dump(top_25, open('top_25.pkl', 'wb'))
 
 model, pred = build_model(df, 'Make', features)
 

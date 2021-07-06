@@ -12,7 +12,7 @@ Quickest method would be to use virtualenv:
 * Update `test_features.py` with the values you wish to send
 * Run `run.sh`, which will begin the server with a pre-trained model
 * Run `request.py` in a new terminal window
-* The request will return a prediction in the form of "Prediction: {Make}"
+* The request will return a prediction in the form of "Prediction: {Make}", along with letting you know if it's in the top 25 Makes
 * If you wish to re-train the model and start the server you can use `run_model.sh` instead
 
 ## Known Issues
