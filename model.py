@@ -4,11 +4,11 @@ from sklearn import metrics
 from sklearn import preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
+# from sklearn.preprocessing import OneHotEncoder
 
 print('Getting data set...')
-# dataset = pd.read_csv('https://s3-us-west-2.amazonaws.com/pcadsassessment/parking_citations.corrupted.csv')
-dataset = pd.read_csv('parking_citations.corrupted.csv')
+dataset = pd.read_csv('https://s3-us-west-2.amazonaws.com/pcadsassessment/parking_citations.corrupted.csv')
+# dataset = pd.read_csv('parking_citations.corrupted.csv')
 
 def prepare_data(df):
     # Drop rows missing our output variable
