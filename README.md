@@ -16,6 +16,7 @@ Install method described uses virtualenv:
 * Run `request.py` in a new terminal window
 * The request will return a prediction in the form of "Prediction: {Make}", along with letting you know if it's in the top 25 Makes
 * If you wish to re-train the model and start the server you can use `run_model.sh` instead
+* Lastly, just to show it can return a different result: You can copy over the data from `test_features_alternate.py` (or just change the name) and re-run.
 
 ## Known Issues
 * I have noticed that on occasion I will need to restart my terminal in order to get the request to work properly. If it seems to be hanging at "Sending request..." then restart your terminal and run `run.sh` once more.
