@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from flask import Flask, request, jsonify
 import pickle
 
@@ -11,13 +12,17 @@ model = pickle.load(open('make_model.pkl', 'rb'))
 
 def predict():
     # Get data from POST request
-    data = request.get_json(force=True)
+    print(' * Getting request...')
+    # data = request.get_json(force=True)
+    data = request.get_json()
+    # Convert dict to dataframe
+    df = pd.DataFrame(data, index = [0])
     # Make prediction from loaded model
-    prediction = model.predict([[np.array(data['exp'])]])
+    print(' * Making prediction...')
+    prediction = model.predict(df)
     # Get first value of prediction
     output = prediction[0]
     return jsonify(output)
-
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

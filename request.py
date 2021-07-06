@@ -1,14 +1,10 @@
-import argparse
+from test_features import features
 import requests
 
 url = 'http://localhost:5000/api'
 
-parser = argparse.ArgumentParser()
-parser.add_argument('features', help='A json formatted file object of features')
-args = parser.parse_args()
-features = args.features
-print(features)
-
+print('Sending request...')
 r = requests.post(url, json=features)
+# r = requests.post(url, json=features)
 # r = requests.post(url, json={'exp':1.8})
-print(r.json())
+print('Prediction:', r.json()) 

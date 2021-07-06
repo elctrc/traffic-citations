@@ -7,8 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
 print('Getting data set...')
-# dataset = pd.read_csv('https://s3-us-west-2.amazonaws.com/pcadsassessment/parking_citations.corrupted.csv')
-dataset = pd.read_csv('parking_citations.corrupted.csv')
+dataset = pd.read_csv('https://s3-us-west-2.amazonaws.com/pcadsassessment/parking_citations.corrupted.csv')
+# dataset = pd.read_csv('parking_citations.corrupted.csv')
 
 def prepare_data(df):
     # Drop rows missing our output variable
@@ -36,7 +36,8 @@ def build_model(df, output_var, features):
     y = df[output_var]
     # Set our features
     # X = make_dummies(df, features)
-    X = pd.get_dummies(df[features])
+    # X = pd.get_dummies(df[features])
+    X = df[features]
     # Split our dataset into training/test set
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state = 42)
     # Set up our Random Forest
@@ -47,7 +48,8 @@ def build_model(df, output_var, features):
     return model, y_pred
 
 df = prepare_data(dataset)
-features = ['RP State Plate', 'Body Style', 'Color', 'Agency', 'Fine amount']
+# features = ['RP State Plate', 'Body Style', 'Color', 'Agency', 'Fine amount']
+features = ['Issue time', 'Plate Expiry Date', 'Agency', 'Fine amount', 'Latitude', 'Longitude']
 top_25 = get_top_25(df)
 
 model, pred = build_model(df, 'Make', features)
@@ -57,19 +59,19 @@ print('Saving model to disk...')
 pickle.dump(model, open('make_model.pkl', 'wb'))
 
 # Loading model to compare the results
-# test_model = pickle.load(open('make_model.pkl', 'rb'))
+test_model = pickle.load(open('make_model.pkl', 'rb'))
 
-# test_set = {
-#     'RP State Plate': 'AZ',
-#     'Body Style': 'VN',
-#     'Color': 'GY',
-#     'Agency': 54.0,
-#     'Fine amount': 73
-# }
+test_set = {
+    'Issue time': 1710.0,
+    'Plate Expiry Date': 201605.0,
+    'Agency': 54.0,
+    'Fine amount': 73,
+    'Latitude': 99999.0,
+    'Longitude': 99999.0
+}
 
-# test_df = pd.DataFrame(test_set, index = [0])
-# print(test_df)
+test_df = pd.DataFrame(test_set, index = [0])
+print(test_df)
 # prepared_test = pd.get_dummies(test_df)
 # prepared_test = prepared_test.reindex(labels=pd.get_dummies(df[features]).columns, axis=1)
-
-# print(model.predict(prepared_test))
+print('Prediction:', model.predict(test_df))
