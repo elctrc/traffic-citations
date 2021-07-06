@@ -1,6 +1,13 @@
 # traffic-citations
 Contains corrupted data set of vehicle citations. The goal of this project is to predict the make of each missing vehicle
 
+## Installation
+Quickest method would be to use virtualenv:
+* Install virtualenv if not already installed: `pip install virtualenv`
+* Create new virtualenv: `virtualenv venv`
+* Activate virtualenv: `source venv/bin/activate`
+* Install from requirements: `pip install -r requirements.txt`
+
 ## To Run
 * Run `run.sh`, which will begin the server with a pre-trained model.
 * If you wish to re-train the model and start the server you can use `run_model.sh` instead
